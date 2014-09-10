@@ -4,7 +4,7 @@
   "description": "A Protractor JS pre-processor to load ABE Specs as Angular Mocks",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "grunt test"
   },
   "keywords": [
     "protractor",
@@ -14,6 +14,19 @@
     "mock",
     "angular"
   ],
-  "author": "Nick White <nickwhite@toxicd.co.uk>",
-  "license": "MIT"
+  "author": [
+    "Rockabox Ltd. <tech@rockabox.com>",
+    "Nick White <nickswhite89@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-jscs": "~0.7.1",
+    "load-grunt-tasks": "~0.6.0"
+  },
+  "engines": {
+    "node": "~0.10.0"
+  }
 }
