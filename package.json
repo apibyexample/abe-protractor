@@ -2,7 +2,15 @@
   "name": "abe-protractor",
   "version": "0.0.1",
   "description": "A Protractor JS pre-processor to load ABE Specs as Angular Mocks",
-  "main": "index.js",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/apibyexample/abe-protractor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/apibyexample/abe-protractor/issues"
+  },
+  "homepage": "https://github.com/apibyexample/abe-protractor",
   "scripts": {
     "test": "grunt test"
   },
@@ -19,6 +27,10 @@
     "Nick White <nickswhite89@gmail.com>"
   ],
   "license": "MIT",
+  "dependencies": {
+    "protractor": "~0.23.0",
+    "glob": "~4.0.5"
+  },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",

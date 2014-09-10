@@ -1,3 +1,7 @@
+[![Build Status](http://img.shields.io/travis/apibyexample/abe-protractor/master.svg)](https://travis-ci.org/apibyexample/abe-protractor)
+
+
+
 API By Example helper for Protractor
 ====================================
 
