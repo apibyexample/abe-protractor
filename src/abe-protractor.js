@@ -4,41 +4,6 @@ var glob = require('glob'),
     fs = require('fs');
 
 exports.setupServiceStubs = function (options) {
-    var defaultStub = function (data) {
-            angular
-                .module('app.stubs.line-item-ad-unit', [
-                    'ngMockE2E',
-                    'app'
-                ])
-                .run(function ($httpBackend) {
-                    var createStub = function (method, example, $httpBackend) {
-                            var httpMethod = method.toUpperCase(),
-                                url = new RegExp(example.request.url),
-                                res = example.response;
-
-                            $httpBackend
-                                ['when' + httpMethod](url)
-                                .respond(function (method, url) {
-                                    return [res.status, res.body];
-                                });
-                        },
-                        methodData,
-                        method;
-
-                    for (methodData in data) {
-                        var httpMethod = data[methodData].method,
-                            examples = data[methodData].examples;
-
-                        for (method in examples) {
-                            createStub(
-                                httpMethod,
-                                examples[method],
-                                $httpBackend
-                            );
-                        }
-                    }
-                });
-        };
 
     // Loop over all JSON mock data folders pased to the setupServiceStubs
     glob
@@ -69,7 +34,8 @@ exports.setupServiceStubs = function (options) {
             if (fs.existsSync(stubFullPath)) {
                 stub = require(stubFullPath);
             } else {
-                stub = defaultStub;
+                var generateStub = require('./abe-generate-stub.js');
+                stub = generateStub.generateDefaultStub;
             }
 
             // Require each of the JSON files in the folder into a object hash
