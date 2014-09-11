@@ -35,6 +35,11 @@ exports.setupServiceStubs = function (options) {
                 stub = require(stubFullPath);
             } else {
                 var generateStub = require('./abe-generate-stub.js');
+                data = {
+                    'stub-options': {
+                        'module_name': moduleName
+                    }
+                };
                 stub = generateStub.generateDefaultStub;
             }
 

@@ -1,6 +1,6 @@
 exports.generateDefaultStub = function (data) {
     angular
-        .module('app.stubs.line-item-ad-unit', [
+        .module(data['stub-options']['module_name'], [
             'ngMockE2E',
             'app'
         ])
@@ -18,6 +18,8 @@ exports.generateDefaultStub = function (data) {
                 },
                 methodData,
                 method;
+
+            delete data['stub-options'];
 
             for (methodData in data) {
                 var httpMethod = data[methodData].method,
