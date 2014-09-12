@@ -1,0 +1,20 @@
+{
+    "description": "Sample for Query",
+    "url": "/",
+    "method": "GET",
+    "examples": {
+        "OK": {
+            "description": "Sample successful GET",
+            "request": {
+                "queryParams": {},
+                "headers": { "Content-type": "application/json" },
+                "body": {}
+            },
+            "response": {
+                "status": 201,
+                "headers": { "Content-type": "application/json" },
+                "body": { "id": 1, "payload": "Sample" }
+            }
+        }
+    }
+}

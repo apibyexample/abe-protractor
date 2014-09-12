@@ -1,6 +1,9 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        'jasmine_node': {
+            all: ['tests/']
+        },
         jshint: {
             options: {
                 jshintrc: '.jshintrc'
@@ -30,7 +33,8 @@ module.exports = function (grunt) {
 
     grunt.task.registerTask('test', [
         'jshint:test',
-        'jscs:test'
+        'jscs:test',
+        'jasmine_node'
     ]);
 
     grunt.registerTask('default', [
