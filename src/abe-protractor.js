@@ -1,6 +1,7 @@
 var glob = require('glob'),
     path = require('path'),
-    util = require('util');
+    util = require('util'),
+    fs = require('fs');
 
 exports.setupServiceStubs = function (options) {
 
@@ -25,9 +26,22 @@ exports.setupServiceStubs = function (options) {
                 moduleName = util.format('app.stubs.%s', folder),
                 stubPath = util
                     .format(options.stubsLocation + '%s.stub.js', folder),
-                stub = require(process.cwd() + stubPath),
+                stubFullPath = process.cwd() + stubPath,
+                stub,
                 data = {},
                 methods = [];
+
+            if (fs.existsSync(stubFullPath)) {
+                stub = require(stubFullPath);
+            } else {
+                var generateStub = require('./abe-generate-stub.js');
+                data = {
+                    'stub-options': {
+                        'module_name': moduleName
+                    }
+                };
+                stub = generateStub.generateDefaultStub;
+            }
 
             // Require each of the JSON files in the folder into a object hash
             // keyed by filename sans file extention, yielding an object with
