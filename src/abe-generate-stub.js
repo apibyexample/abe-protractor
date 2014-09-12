@@ -7,7 +7,7 @@ exports.generateDefaultStub = function (data) {
         .run(function ($httpBackend) {
             var createStub = function (method, example, $httpBackend) {
                     var httpMethod = method.toUpperCase(),
-                        url = new RegExp(example.request.url),
+                        url = new RegExp(example.request.url + '$'),
                         res = example.response;
 
                     $httpBackend
