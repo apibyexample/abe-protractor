@@ -15,18 +15,24 @@ describe('ABE Protractor mockModule loading tests', function () {
     // to setup the Angular App (setup by Protractor)
     browser = browserMock;
 
-    it ('adds default mock module to browser', function () {
-        spyOn(browser, 'addMockModule').andCallThrough();
-        abePro.setupServiceStubs(options);
+    describe('Check addMockModule is called correctly', function () {
+        beforeEach(function () {
+            spyOn(browser, 'addMockModule').andCallThrough();
+            abePro.setupServiceStubs(options);
+        });
 
-        expect(browser.addMockModule).toHaveBeenCalled();
+        it ('adds default mock module to browser', function () {
+            expect(browser.addMockModule).toHaveBeenCalled();
+        });
 
-        var argsCalled = browser.addMockModule.argsForCall[0],
-            appName = 'app.stubs.hello';
+        it ('adds a default mock module with correct args', function () {
+            var argsCalled = browser.addMockModule.argsForCall[0],
+                appName = 'app.stubs.hello';
 
-        expect(argsCalled[0]).toBe(appName);
-        expect(typeof argsCalled[1]).toBe('function');
-        expect(argsCalled[2]['stub-options']['module_name']).toBe(appName);
+            expect(argsCalled[0]).toBe(appName);
+            expect(typeof argsCalled[1]).toBe('function');
+            expect(argsCalled[2]['stub-options']['module_name']).toBe(appName);
+        });
     });
 
 });
