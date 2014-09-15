@@ -5,6 +5,7 @@ var rewire = require('rewire'),
             return [appName, app, data];
         }
     },
+    errors = abePro['__get__']('errors'),
     setupStub = abePro['__get__']('setupStub');
 
 describe('ABE Protractor mockModule loading tests', function () {
@@ -18,17 +19,15 @@ describe('ABE Protractor mockModule loading tests', function () {
     browser = browserMock;
 
     it ('Should return that it\'s not a folder', function () {
-        var match = './tests/mocks/query.json',
-            result = 'Not a folder';
+        var match = './tests/mocks/query.json';
 
-        expect(setupStub(match, options)).toEqual(result);
+        expect(setupStub(match, options)).toEqual(errors['NO_FOLDER']);
     });
 
     it ('Should return that there are no JSON Files', function () {
-        var match = './tests/mocks/',
-            result = 'no JSON files';
+        var match = './tests/mocks/';
 
-        expect(setupStub(match, options)).toEqual(result);
+        expect(setupStub(match, options)).toEqual(errors['NO_JSON']);
     });
 
     describe('Check addMockModule is called correctly', function () {

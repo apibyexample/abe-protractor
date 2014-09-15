@@ -2,11 +2,15 @@ var glob = require('glob'),
     path = require('path'),
     util = require('util'),
     fs = require('fs'),
+    errors = {
+        'NO_FOLDER': 'not a folder',
+        'NO_JSON': 'no JSON files in folder'
+    },
     setupStub = function (match, options) {
         // Return early if this isn't a folder
 
         if (match.slice(1 * -1) !== path.sep) {
-            return 'Not a folder';
+            return errors['NO_FOLDER'];
         }
 
         var jsonFiles = glob.sync(match + '*.json');
@@ -14,7 +18,7 @@ var glob = require('glob'),
         // Return early if there are no JSON files in this folder
 
         if (jsonFiles.length === 0) {
-            return 'no JSON files';
+            return errors['NO_JSON'];
         }
 
         var folder = path.basename(match),
