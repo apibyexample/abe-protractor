@@ -1,9 +1,12 @@
-var abePro = require('../src/abe-protractor.js'),
+var rewire = require('rewire'),
+    abePro = rewire('../src/abe-protractor.js'),
     browserMock = {
         'addMockModule': function (appName, app, data) {
             return [appName, app, data];
         }
-    };
+    },
+    errors = abePro['__get__']('errors'),
+    setupStub = abePro['__get__']('setupStub');
 
 describe('ABE Protractor mockModule loading tests', function () {
     var options = {
@@ -14,6 +17,18 @@ describe('ABE Protractor mockModule loading tests', function () {
     // Makes a global variable for browser as called by the node module
     // to setup the Angular App (setup by Protractor)
     browser = browserMock;
+
+    it ('Should return that it\'s not a folder', function () {
+        var match = './tests/mocks/query.json';
+
+        expect(setupStub(match, options)).toEqual(errors['NO_FOLDER']);
+    });
+
+    it ('Should return that there are no JSON Files', function () {
+        var match = './tests/mocks/';
+
+        expect(setupStub(match, options)).toEqual(errors['NO_JSON']);
+    });
 
     describe('Check addMockModule is called correctly', function () {
         beforeEach(function () {
