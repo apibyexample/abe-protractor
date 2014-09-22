@@ -1,6 +1,6 @@
 {
   "name": "abe-protractor",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A Protractor JS pre-processor to load ABE Specs as Angular Mocks",
   "main": "src/abe-protractor.js",
   "repository": {
@@ -24,11 +24,12 @@
   ],
   "author": [
     "Rockabox Ltd. <tech@rockabox.com>",
-    "Nick White <nickswhite89@gmail.com>"
+    "Nick White <nickswhite89@gmail.com>",
+    "API By Example <apibyexample@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
-    "protractor": "~0.23.0",
+    "protractor": "~1.0",
     "glob": "~4.0.5"
   },
   "devDependencies": {
