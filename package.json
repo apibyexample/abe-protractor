@@ -24,7 +24,8 @@
   ],
   "author": [
     "Rockabox Ltd. <tech@rockabox.com>",
-    "Nick White <nickswhite89@gmail.com>"
+    "Nick White <nickswhite89@gmail.com>",
+    "API By Example <apibyexample@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
