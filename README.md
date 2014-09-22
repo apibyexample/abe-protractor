@@ -1,5 +1,6 @@
 [![Build Status](http://img.shields.io/travis/apibyexample/abe-protractor/master.svg)](https://travis-ci.org/apibyexample/abe-protractor)
-
+[![devDependency Status](https://david-dm.org/apibyexample/abe-protractor/status.svg)](https://david-dm.org/apibyexample/abe-protractor#info=dependencies)
+[![devDependency Status](https://david-dm.org/apibyexample/abe-protractor/dev-status.svg)](https://david-dm.org/apibyexample/abe-protractor#info=devDependencies)
 
 
 API By Example helper for Protractor
