@@ -13,7 +13,7 @@ from within JS code. In particular we aim to support [Protractor JS](https://git
 ## Usage
 
 In order to use ``abe-protractor`` you will need to add the setup service stubs,
-using Protractor's ``onPrepare`` within your protractor-conf`` file.
+using Protractor's ``onPrepare`` within your protractor-conf file.
 
 Example Usage:
 
