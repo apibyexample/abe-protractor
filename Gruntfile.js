@@ -1,6 +1,14 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        connect: {
+            server: {
+                options: {
+                    port: 8081,
+                    base: 'tests/e2e/app'
+                }
+            }
+        },
         'jasmine_node': {
             all: [
                 'tests/unit/'
@@ -14,6 +22,7 @@ module.exports = function (grunt) {
                 files: {
                     src: [
                         'Gruntfile.js',
+                        'tests/**/*.js',
                         'src/**/*.js'
                     ]
                 }
@@ -27,6 +36,15 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+        protractor: {
+            options: {
+                configFile: 'protractor.conf.js',
+                args: {
+                    baseUrl: 'http://localhost:8081'
+                }
+            },
+            e2e: {}
         }
     });
 
