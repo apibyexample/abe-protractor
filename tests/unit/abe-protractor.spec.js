@@ -1,5 +1,5 @@
 var rewire = require('rewire'),
-    abePro = rewire('../src/abe-protractor.js'),
+    abePro = rewire('../../src/abe-protractor.js'),
     browserMock = {
         'addMockModule': function (appName, app, data) {
             return [appName, app, data];
