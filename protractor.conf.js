@@ -6,8 +6,9 @@
 var abeProtractor = require('./src/abe-protractor.js');
 
 exports.config = {
-    capability: {
-        browserName: 'chrome'
+    capabilities: {
+        browserName: 'phantomjs',
+        'phantomjs.binary.path':'./node_modules/phantomjs/bin/phantomjs'
     },
     suites: {
         all: 'tests/e2e/**/*.spec.js'

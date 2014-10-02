@@ -53,6 +53,11 @@ module.exports = function (grunt) {
                 }
             },
             e2e: {}
+        },
+        'selenium_start': {
+            options: {
+                port: 4445
+            }
         }
     });
 
@@ -64,9 +69,21 @@ module.exports = function (grunt) {
         'jscs:test'
     ]);
 
+    grunt.task.registerTask('e2e', [
+        'connect:server',
+        'run-e2e'
+    ]);
+
+    grunt.task.registerTask('run-e2e', [
+        'selenium_phantom_hub',
+        'protractor',
+        'selenium_stop'
+    ]);
+
     grunt.task.registerTask('test', [
         'lint',
-        'jasmine_node'
+        'jasmine_node',
+        'e2e'
     ]);
 
     grunt.registerTask('default', [
