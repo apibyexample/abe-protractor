@@ -27,4 +27,5 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-vendor
+# Vendor files from bower needed for tests
+tests/e2e/app/vendor
