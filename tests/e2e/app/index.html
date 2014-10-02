@@ -8,12 +8,16 @@
     <script src="vendor/angular-mocks/angular-mocks.js"></script>
     <script src="myTestApp.js"></script>
 </head>
-<body ng-controller="myTestAppCtrl">
+<body ng-controller="testCtrl">
     <h1>{{ app.name }}</h1>
     <div>
-        <p class="firstname">{{ users['first-name'] }}</p>
-        <p class="lastname">{{ users['last-name'] }}</p>
-        <p class="age">{{ users.age }}</p>
+        <p class="firstname">{{ app.users['first-name'] }}</p>
+        <p class="lastname">{{ app.users['last-name'] }}</p>
+        <p class="age">{{ app.users.age }}</p>
+    </div>
+    <div class="hello">
+        <p class="id">{{ app.hello.id }}</p>
+        <p class="payload">{{ app.hello.payload }}</p>
     </div>
 </body>
 </html>

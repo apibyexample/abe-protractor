@@ -3,22 +3,30 @@ angular
         'ngResource',
         'ngMockE2E'
     ])
-    .controller('myTestAppCtrl', function ($scope, myTestResource) {
-        var app = {
-            name: 'My Test App for ABE Protractor'
+    .controller('testCtrl', function ($scope, helloResource, userResource) {
+        $scope.app = {
+            name: 'My Test App for ABE Protractor',
+            hello: null,
+            users: null
         };
 
-        $scope.app = app;
-        $scope.users = null;
-        myTestResource.get().$promise.then(function (res) {
-            $scope.users = res;
+        helloResource.get().$promise.then(function (res) {
+            $scope.app.hello = res;
+        });
+
+        userResource.get().$promise.then(function (res) {
+            $scope.app.users = res;
         });
     })
-    .factory('myTestResource', function ($resource) {
+    .factory('helloResource', function ($resource) {
         var url = 'http://localhost:8081/',
-            myTestResource = $resource(url + 'json/endpoint.json', {
-                id: '@id'
-            });
+            helloResource = $resource(url + 'json/hello');
 
-        return myTestResource;
+        return helloResource;
+    })
+    .factory('userResource', function ($resource) {
+        var url = 'http://localhost:8081/',
+            userResource = $resource(url + 'json/users');
+
+        return userResource;
     });
