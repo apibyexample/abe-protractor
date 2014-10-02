@@ -1,6 +1,13 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        clean: {
+            test: {
+                src: [
+                    'tests/e2e/app/vendor'
+                ]
+            }
+        },
         connect: {
             server: {
                 options: {
@@ -23,6 +30,7 @@ module.exports = function (grunt) {
                     src: [
                         'Gruntfile.js',
                         'tests/**/*.js',
+                        '!tests/e2e/app/vendor/**/*.js',
                         'src/**/*.js'
                     ]
                 }
@@ -51,9 +59,13 @@ module.exports = function (grunt) {
     // Load all Grunt available tasks
     require('load-grunt-tasks')(grunt);
 
-    grunt.task.registerTask('test', [
+    grunt.task.registerTask('lint', [
         'jshint:test',
-        'jscs:test',
+        'jscs:test'
+    ]);
+
+    grunt.task.registerTask('test', [
+        'lint',
         'jasmine_node'
     ]);
 

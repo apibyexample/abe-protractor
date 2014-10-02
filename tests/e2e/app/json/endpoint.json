@@ -1,11 +1,11 @@
 {
-    first-name: 'Joe',
-    last-name: 'Bloggs',
-    age: 29,
-    address: {
-        line-1: '6 White House',
-        line-1: '12 Springfield Road',
-        county: 'Surrey'
-        postcode: 'SM5 7AQ'
+    "first-name": "Joe",
+    "last-name": "Bloggs",
+    "age": 29,
+    "address": {
+        "line-1": "6 White House",
+        "line-1": "12 Springfield Road",
+        "county": "Surrey",
+        "postcode": "SM5 7AQ"
     }
 }

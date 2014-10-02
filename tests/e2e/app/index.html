@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myTestApp">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <title>My ABE Protractor test App</title>
@@ -10,5 +10,10 @@
 </head>
 <body ng-controller="myTestAppCtrl">
     <h1>{{ app.name }}</h1>
+    <div>
+        <p class="firstname">{{ users['first-name'] }}</p>
+        <p class="lastname">{{ users['last-name'] }}</p>
+        <p class="age">{{ users.age }}</p>
+    </div>
 </body>
 </html>

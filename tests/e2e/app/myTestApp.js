@@ -1,5 +1,5 @@
 angular
-    .module('myTestApp', [
+    .module('app', [
         'ngResource',
         'ngMockE2E'
     ])
@@ -9,15 +9,15 @@ angular
         };
 
         $scope.app = app;
+        $scope.users = null;
+        myTestResource.get().$promise.then(function (res) {
+            $scope.users = res;
+        });
     })
     .factory('myTestResource', function ($resource) {
-        var myTestResource = $resource('json/endpoint.json', {
+        var url = 'http://localhost:8081/',
+            myTestResource = $resource(url + 'json/endpoint.json', {
                 id: '@id'
-            },
-            {
-                update: {
-                    method: 'PUT'
-                }
             });
 
         return myTestResource;
