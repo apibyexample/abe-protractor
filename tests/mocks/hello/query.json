@@ -6,6 +6,7 @@
         "OK": {
             "description": "Sample successful GET",
             "request": {
+                "url": "json/hello",
                 "queryParams": {},
                 "headers": { "Content-type": "application/json" },
                 "body": {}

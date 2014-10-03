@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>My ABE Protractor test App</title>
+    <script src="vendor/angular/angular.js"></script>
+    <script src="vendor/angular-resource/angular-resource.js"></script>
+    <script src="vendor/angular-mocks/angular-mocks.js"></script>
+    <script src="myTestApp.js"></script>
+</head>
+<body ng-controller="testCtrl">
+    <h1>{{ app.name }}</h1>
+    <div>
+        <p class="firstname">{{ app.users['first-name'] }}</p>
+        <p class="lastname">{{ app.users['last-name'] }}</p>
+        <p class="age">{{ app.users.age }}</p>
+    </div>
+    <div class="hello">
+        <p class="id">{{ app.hello.id }}</p>
+        <p class="payload">{{ app.hello.payload }}</p>
+    </div>
+</body>
+</html>
