@@ -41,6 +41,7 @@
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-jasmine-node": "~0.2.1",
     "grunt-jscs": "~0.7.1",
+    "grunt-jsdoc": "~0.5.7",
     "grunt-protractor-runner": "~1.1.4",
     "grunt-selenium-webdriver": "~0.2.422",
     "load-grunt-tasks": "~0.6.0",

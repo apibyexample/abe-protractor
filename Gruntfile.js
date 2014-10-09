@@ -45,6 +45,14 @@ module.exports = function (grunt) {
                 }
             }
         },
+        jsdoc: {
+            src: [
+                'src/**/*.js'
+            ],
+            options: {
+                destination: '.reports'
+            }
+        },
         protractor: {
             options: {
                 configFile: 'protractor.conf.js',

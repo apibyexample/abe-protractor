@@ -1,3 +1,29 @@
+/**
+ * @module abe-protractor
+ *
+ * @requires {@link https://www.npmjs.org/package/protractor|protractor}
+ * @requires {@link https://www.npmjs.org/package/glob|glob}
+ * @requires {@link http://nodejs.org/api/fs.html|fs}
+ * @requires {@link http://nodejs.org/api/path.html|path}
+ * @requires {@link http://nodejs.org/api/util.html|util}
+ *
+ *
+ * @description
+ * Using ABE-spec as a base, allow for automatic creating of stubs using
+ * ngMockE2E $httpBackend.
+ *
+ * @example
+ * abeProtractor = require('abe-protractor');
+ *
+ * abeProtractor.setupServiceStubs({
+ *   mocksLocation: 'myApp/mocks/**\/*\/'
+ *   stubsLocation: 'myApp/mockStubs/',
+ *   log: true
+ * });
+ * // This will then setup stubs you have manually created and some default
+ * // mocks
+ */
+
 var glob = require('glob'),
     path = require('path'),
     util = require('util'),
@@ -6,73 +32,100 @@ var glob = require('glob'),
         'NO_FOLDER': 'not a folder',
         'NO_JSON': 'no JSON files in folder'
     },
-    setupStub = function (match, options) {
-        // Return early if this isn't a folder
+    setupStub,
+    setupServiceStubs;
 
-        if (match.slice(1 * -1) !== path.sep) {
-            return errors['NO_FOLDER'];
-        }
+/**
+ * @private
+ * @description
+ * Setup a stub and add to the browser.
+ *
+ * @param {string} match   Location of mock
+ * @param {object} options Options to be passed to the setupServiceStubs
+ * @property {string} options.mocksLocation This is your location of your ABE
+ *                                          mocks
+ * @property {string} options.stubsLocation This is base location of your
+ *                                          Angular custom Stubs
+ * @property {boolean} options.log Whether or not to log out the stubs setup
+ *
+ */
+setupStub = function (match, options) {
+    // Return early if this isn't a folder
 
-        var jsonFiles = glob.sync(match + '*.json');
+    if (match.slice(1 * -1) !== path.sep) {
+        return errors['NO_FOLDER'];
+    }
 
-        // Return early if there are no JSON files in this folder
+    var jsonFiles = glob.sync(match + '*.json');
 
-        if (jsonFiles.length === 0) {
-            return errors['NO_JSON'];
-        }
+    // Return early if there are no JSON files in this folder
 
-        var folder = path.basename(match),
-            moduleName = util.format('app.stubs.%s', folder),
-            stubPath = util
-                .format(options.stubsLocation + '%s.stub.js', folder),
-            stubFullPath = process.cwd() + stubPath,
-            stub,
-            data = {},
-            methods = [];
+    if (jsonFiles.length === 0) {
+        return errors['NO_JSON'];
+    }
 
-        if (fs.existsSync(stubFullPath)) {
-            stub = require(stubFullPath);
-        } else {
-            var generateStub = require('./abe-generate-stub.js');
-            data = {
-                'stub-options': {
-                    'module_name': moduleName
-                }
-            };
-            stub = generateStub.generateDefaultStub;
-        }
+    var folder = path.basename(match),
+        moduleName = util.format('app.stubs.%s', folder),
+        stubPath = util
+            .format(options.stubsLocation + '%s.stub.js', folder),
+        stubFullPath = process.cwd() + stubPath,
+        stub,
+        data = {},
+        methods = [];
 
-        // Require each of the JSON files in the folder into a object hash
-        // keyed by filename sans file extention, yielding an object with
-        // a structure similar to,
-        //
-        // {
-        //     query: {mock-data},
-        //     get: {mock-data},
-        //     post: {mock-data},
-        //     put: {mock-data}
-        // }
+    if (fs.existsSync(stubFullPath)) {
+        stub = require(stubFullPath);
+    } else {
+        var generateStub = require('./abe-generate-stub.js');
+        data = {
+            'stub-options': {
+                'module_name': moduleName
+            }
+        };
+        stub = generateStub.generateDefaultStub;
+    }
 
-        jsonFiles.forEach(function (jsonPath) {
-            var name = path.basename(jsonPath, '.json'),
-                relPath = path.relative(__dirname, jsonPath);
-            data[name] = require(relPath);
-            methods.push(name);
-        });
+    // Require each of the JSON files in the folder into a object hash
+    // keyed by filename sans file extention, yielding an object with
+    // a structure similar to,
+    //
+    // {
+    //     query: {mock-data},
+    //     get: {mock-data},
+    //     post: {mock-data},
+    //     put: {mock-data}
+    // }
 
-        if (options.log) {
-            console.log(
-                util.format('Adding %s module (%s)', moduleName, methods)
-            );
-        }
+    jsonFiles.forEach(function (jsonPath) {
+        var name = path.basename(jsonPath, '.json'),
+            relPath = path.relative(__dirname, jsonPath);
+        data[name] = require(relPath);
+        methods.push(name);
+    });
 
-        // Tell Protractor to add the stubbed resource module to the app at
-        // runtime. The mock data object is passed through to the stub.
+    if (options.log) {
+        console.log(
+            util.format('Adding %s module (%s)', moduleName, methods)
+        );
+    }
 
-        browser.addMockModule(moduleName, stub, data);
-    };
+    // Tell Protractor to add the stubbed resource module to the app at
+    // runtime. The mock data object is passed through to the stub.
 
-exports.setupServiceStubs = function (options) {
+    browser.addMockModule(moduleName, stub, data);
+};
+
+/**
+ * Setup Service Stubs
+ *
+ * @param {object} options Options to be passed to the setupServiceStubs
+ * @property {string} options.mocksLocation This is your location of your ABE
+ *                                          mocks
+ * @property {string} options.stubsLocation This is base location of your
+ *                                          Angular custom Stubs
+ * @property {boolean} options.log Whether or not to log out the stubs setup
+ */
+setupServiceStubs = function (options) {
 
     // Loop over all JSON mock data folders pased to the setupServiceStubs
     glob
@@ -83,3 +136,5 @@ exports.setupServiceStubs = function (options) {
             setupStub(match, options);
         });
 };
+
+module.exports.setupServiceStubs = setupServiceStubs;
