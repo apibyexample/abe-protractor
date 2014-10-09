@@ -33,6 +33,7 @@
     "glob": "~4.0.5"
   },
   "devDependencies": {
+    "abe-spec": "git+https://git@github.com/apibyexample/abe-spec.git#979fbdc",
     "bower": "~1.3.12",
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",

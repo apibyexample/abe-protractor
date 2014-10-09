@@ -18,7 +18,7 @@ exports.config = {
     },
     onPrepare: function () {
         abeProtractor.setupServiceStubs({
-            mocksLocation: 'tests/mocks/**/*',
+            mocksLocation: 'node_modules/abe-spec/samples/**/*',
             stubsLocation: 'tests/e2e/app/stubs/',
             log: true
         });

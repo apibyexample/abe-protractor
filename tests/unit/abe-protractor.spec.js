@@ -10,7 +10,7 @@ var rewire = require('rewire'),
 
 describe('ABE Protractor mockModule loading tests', function () {
     var options = {
-            'mocksLocation': './tests/mocks/**',
+            'mocksLocation': 'node_modules/abe-spec/samples/**/*',
             'stubsLocation': './',
             'log': false
         };
@@ -19,13 +19,13 @@ describe('ABE Protractor mockModule loading tests', function () {
     browser = browserMock;
 
     it ('Should return that it\'s not a folder', function () {
-        var match = './tests/mocks/query.json';
+        var match = './node_modules/abe-spec/samples/basic/post.json';
 
         expect(setupStub(match, options)).toEqual(errors['NO_FOLDER']);
     });
 
     it ('Should return that there are no JSON Files', function () {
-        var match = './tests/mocks/';
+        var match = './node_modules/abe-spec/samples/';
 
         expect(setupStub(match, options)).toEqual(errors['NO_JSON']);
     });
@@ -42,7 +42,7 @@ describe('ABE Protractor mockModule loading tests', function () {
 
         it ('adds a default mock module with correct args', function () {
             var argsCalled = browser.addMockModule.argsForCall[0],
-                appName = 'app.stubs.hello';
+                appName = 'app.stubs.basic';
 
             expect(argsCalled[0]).toBe(appName);
             expect(typeof argsCalled[1]).toBe('function');

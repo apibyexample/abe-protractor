@@ -9,7 +9,7 @@ describe('Test that my App can get Mocked data', function () {
         expect(element(by.css('p.age')).getText()).toEqual('29');
     });
 
-    it ('Should have JSON data from hello stub', function () {
-        expect(element(by.css('.hello .id')).getText()).toEqual('1');
+    it ('Should have JSON data from basic stub', function () {
+        expect(element(by.css('.basic .id')).getText()).toEqual('1');
     });
 });
