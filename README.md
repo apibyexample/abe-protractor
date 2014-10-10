@@ -15,6 +15,36 @@ from within JS code. In particular we aim to support [Protractor JS](https://git
 In order to use ``abe-protractor`` you will need to add the setup service stubs,
 using Protractor's ``onPrepare`` within your protractor-conf file.
 
+### mocksLocation
+
+This is the location of your ABE mock files, in which to cycle through.
+
+### stubsLocation
+
+Type: ``String`` *Required*
+
+This is the location in which your manually created Stubs are kept, the file locations should mirror those found within ``mocksLocation``.
+
+### log
+
+Type: ``Boolean`` Default: ``false``
+
+This flags whether or not you wish ``abe-protractor`` to log out when stubs have been created during the setup of running Protractor tests.
+
+Example folder structure ``(desc could be users)``:
+
+```
+mocks/                      -> Base of your Mock storage
+    mock-desc               -> Your container for your Mock
+        post.json           -> The POST example of your API Mock
+        get.json            -> The GET of singular resources within response example of your API Mock
+        put.json            -> The PUT example of your API Mock
+        query.json          -> The GET of multiple resources within response example of your API Mock
+stubs/
+    stub-desc
+        mock-desc.stub.js   -> Stub for your Mock
+```
+
 Example Usage:
 
 ```js
@@ -22,8 +52,8 @@ var abeProtractor = require('abe-protractor');
 
 onPrepare: function () {
     abeProtractor.setupServiceStubs({
-        mocksLocation: 'myApp/mocks/**/*',
-        stubsLocation: '/tests/myApp/custom-stubs/',
+        mocksLocation: 'mocks/**/*',
+        stubsLocation: 'stubs/',
         log: true
     });
 }
@@ -39,8 +69,3 @@ for stubs. Using your mock JSON files it will create your stubs for you, based o
 information within your JSON spec.
 
 To take a look at the stub that is generated take a look [here](src/abe-generate-stub.js).
-
-### Logging
-
-When we create the stubs we console log out what has been created, and the method types
-that have been created. **By default this is turned off**.
