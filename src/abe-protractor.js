@@ -13,7 +13,7 @@
  * ngMockE2E $httpBackend.
  *
  * @example
- * abeProtractor = require('abe-protractor');
+ * var abeProtractor = require('abe-protractor');
  *
  * abeProtractor.setupServiceStubs({
  *   mocksLocation: 'myApp/mocks/**\/*\/'
