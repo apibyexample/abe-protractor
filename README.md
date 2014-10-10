@@ -25,8 +25,6 @@ Type: ``String`` *Required*
 
 This is the location in which your manually created Stubs are kept, the file locations should mirror those found within ``mocksLocation``.
 
-This is the location in which you want your new JSON files to be created within.
-
 ### log
 
 Type: ``Boolean`` Default: ``false``
