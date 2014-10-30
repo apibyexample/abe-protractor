@@ -3,7 +3,7 @@
  * extended by the functional and integration test configs.
  */
 
-var abeProtractor = require('./src/abe-protractor.js');
+var abeProtractor = require('./app.js');
 
 exports.config = {
     capabilities: {
