@@ -76,13 +76,12 @@ setupStub = function (match, options) {
     if (fs.existsSync(stubFullPath)) {
         stub = require(stubFullPath);
     } else {
-        var generateStub = require('./abe-generate-stub.js');
+        stub = require('./generate-stub.js').generateStub;
         data = {
             'stub-options': {
                 'module_name': moduleName
             }
         };
-        stub = generateStub.generateDefaultStub;
     }
 
     // Require each of the JSON files in the folder into a object hash

@@ -1,1 +1,1 @@
-module.exports = require('./src/abe-protractor.js');
+module.exports = require('./libs/abe-protractor.js');
