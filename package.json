@@ -1,6 +1,6 @@
 {
   "name": "abe-protractor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Protractor JS pre-processor to load ABE Specs as Angular Mocks",
   "main": "app.js",
   "repository": {
