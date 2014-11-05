@@ -2,7 +2,7 @@
   "name": "abe-protractor",
   "version": "0.1.2",
   "description": "A Protractor JS pre-processor to load ABE Specs as Angular Mocks",
-  "main": "src/abe-protractor.js",
+  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/apibyexample/abe-protractor.git"

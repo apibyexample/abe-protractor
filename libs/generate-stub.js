@@ -1,4 +1,4 @@
-exports.generateDefaultStub = function (data) {
+exports.generateStub = function (data) {
     angular
         .module(data['stub-options']['module_name'], [
             'ngMockE2E'

@@ -66,23 +66,21 @@ setupStub = function (match, options) {
 
     var folder = path.basename(match),
         moduleName = util.format('app.stubs.%s', folder),
-        stubPath = util
-            .format(options.stubsLocation + '%s.stub.js', folder),
-        stubFullPath = process.cwd() + stubPath,
+        filename = util.format('%s.stub.js', folder),
+        stubPath = path.join(process.cwd(), options.stubsLocation, filename),
         stub,
         data = {},
         methods = [];
 
-    if (fs.existsSync(stubFullPath)) {
-        stub = require(stubFullPath);
+    if (fs.existsSync(stubPath)) {
+        stub = require(stubPath);
     } else {
-        var generateStub = require('./abe-generate-stub.js');
+        stub = require('./generate-stub.js').generateStub;
         data = {
             'stub-options': {
                 'module_name': moduleName
             }
         };
-        stub = generateStub.generateDefaultStub;
     }
 
     // Require each of the JSON files in the folder into a object hash
@@ -95,23 +93,18 @@ setupStub = function (match, options) {
     //     post: {mock-data},
     //     put: {mock-data}
     // }
-
     jsonFiles.forEach(function (jsonPath) {
-        var name = path.basename(jsonPath, '.json'),
-            relPath = path.relative(__dirname, jsonPath);
-        data[name] = require(relPath);
+        var name = path.basename(jsonPath, '.json');
+        data[name] = require(path.relative(__dirname, jsonPath));
         methods.push(name);
     });
 
     if (options.log) {
-        console.log(
-            util.format('Adding %s module (%s)', moduleName, methods)
-        );
+        console.log(util.format('Adding %s module (%s)', moduleName, methods));
     }
 
     // Tell Protractor to add the stubbed resource module to the app at
     // runtime. The mock data object is passed through to the stub.
-
     browser.addMockModule(moduleName, stub, data);
 };
 
