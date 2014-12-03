@@ -45,6 +45,7 @@
     "grunt-jsdoc": "~0.5.7",
     "grunt-protractor-runner": "~1.1.4",
     "grunt-selenium-webdriver": "~0.2.422",
+    "load-grunt-config": "~0.16.0",
     "load-grunt-tasks": "~1.0.0",
     "phantomjs": "~1.9.10",
     "protractor": "~1.3.1",
